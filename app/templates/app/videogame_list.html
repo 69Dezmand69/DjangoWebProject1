@@ -1,0 +1,93 @@
+﻿{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="news-title">Видеоигры</h1>
+    <div class="row mb-4">
+        <div class="col-md-4 mb-4 search_card">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Поиск</h5>
+                    <form method="GET" action="{% url 'videogame_list' %}">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Поиск по названию" name="q" value="{{ request.GET.q }}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Поиск</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4 search_card">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Фильтр по жанрам</h5>
+                    <form method="GET" action="{% url 'videogame_list' %}">
+                        <div class="input-group">
+                            <select class="form-control" name="genre">
+                                <option value="">Выберите жанр</option>
+                                {% for genre in genres %}
+                                <option value="{{ genre.name }}" {% if request.GET.genre == genre.name %}selected{% endif %}>{{ genre.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Фильтр</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for game in games %}
+        <div class="col-md-4 mb-4 videogame_card">
+            <div class="card h-100">
+                <img src="{% static 'app/content/' %}{{ game.image }}" class="card-img-top img-fluid" alt="{{ game.title }}" style="object-fit: cover; height: 200px;">
+                <div class="card-body">
+                    <h2 class="news-title">{{ game.title }}</h2>
+                    <p class="card-text genre-info">Жанры: {% for genre in game.genres.all %}{{ genre.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+                    <p class="card-text price-info">Цена: {{ game.price }}</p>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gameModal{{ game.id }}">
+                        Подробнее &raquo;
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="gameModal{{ game.id }}" tabindex="-1" aria-labelledby="gameModalLabel{{ game.id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="news-title" id="gameModalLabel{{ game.id }}">{{ game.title }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <img src="{% static 'app/content/' %}{{ game.image }}" class="img-fluid modal-image" alt="{{ game.title }}" style="object-fit: cover; height: 300px;">
+                        </div>
+                        <p class="price-info">Описание: {{ game.description }}</p>
+                        <p class="genre-info">Жанры: {% for genre in game.genres.all %}{{ genre.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+                        <p class="price-info">Цена: {{ game.price }}</p>
+                        <!-- Add more details here if needed -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+                        
+                    <a href="{% url 'add_to_cart' game.id %}" class="btn btn-success">Добавить в корзину</a>
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+﻿{% if user.is_authenticated %}
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        <a href="{% url 'feedback' %}" class="navbar-brand" id="username">Привет {{ user.username }}!</a>
+        <form id="logoutForm" action="/logout/" method="post" style="display: none;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Выйти</button>
+        </form>
+    </li>
+</ul>
+<script>
+    document.getElementById('username').addEventListener('click', function(event) {
+        event.preventDefault(); // Предотвращаем переход по ссылке при клике
+        var logoutForm = document.getElementById('logoutForm');
+        if (logoutForm.style.display === 'none' || logoutForm.style.display === '') {
+            logoutForm.style.display = 'block';
+        } else {
+            logoutForm.style.display = 'none';
+        }
+    });
+</script>
+{% else %}
+<ul class="nav navbar-nav navbar-right">
+    <li><a href="{% url 'login' %}">Авторизация</a></li>
+</ul>
+{% endif %}

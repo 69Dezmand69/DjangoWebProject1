@@ -1,0 +1,35 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Список игр</h1>
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Фильтровать по жанрам:</h3>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="{% url 'game_list' %}">Все жанры</a></li>
+                {% for genre in genres %}
+                <li class="list-group-item"><a href="{% url 'game_list' %}?genre={{ genre.0 }}">{{ genre.1 }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                {% for game in games %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="{{ game.image.url }}" class="card-img-top" alt="{{ game.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ game.title }}</h5>
+                            <p class="card-text">{{ game.description }}</p>
+                            <p class="card-text">Цена: {{ game.price }}₽</p>
+                            <a href="#" class="btn btn-primary">Купить</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

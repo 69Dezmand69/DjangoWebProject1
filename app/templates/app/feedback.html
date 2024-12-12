@@ -1,0 +1,133 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+{% load static %}
+
+{% if form != None %}
+
+<div class="news-title ">
+    <h1>Оставить отзыв</h1>
+     </div>
+ <div class="feedback-form">
+    <form id="FeedbackForm" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.nickname.id_for_label }}">{{ form.nickname.label }}</label>
+            {{ form.nickname }}<br><br>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.game.id_for_label }}">{{ form.game.label }}</label>
+            {{ form.game }}<br><br>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.speed.id_for_label }}">{{ form.speed.label }}</label>
+            {{ form.speed }}<br><br>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.price.id_for_label }}">{{ form.price.label }}</label>
+            {{ form.price }}<br><br>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.service.id_for_label }}">{{ form.service.label }}</label>
+            {{ form.service }}<br><br>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.message.id_for_label }}">{{ form.message.label }}</label>
+            {{ form.message }}<br><br>
+        </div>
+        <button type="submit" class="btn-primary_feedback">Отправить отзыв</button>
+    </form>
+  </div>
+{% else %}
+<br>
+ <h2 class="news-title">Благодарим за ваш отзыв</h2>
+ <h1 class="zagolovok">Ваш комментарий</h1>
+<br>
+<<ul class="feedback-form">
+    <li class="feedback-item">
+        <span class="feedback-label">Ник:</span>
+        <span class="feedback-value">{{ data.nickname }}</span>
+       
+    </li>
+    <li class="feedback-item">
+        <span class="feedback-label">Приобретенная игра:</span>
+        <span class="feedback-value">{{ data.game }}</span>
+       
+    </li>
+    <li class="feedback-item">
+        <span class="feedback-label">Средняя оценка:</span>
+        <span class="feedback-value">
+    {% if average_rating %}
+        {% if average_rating|floatformat:1 == average_rating|floatformat:0 %}
+            {{ average_rating|floatformat:0 }}
+        {% else %}
+            {{ average_rating|floatformat:1 }}
+        {% endif %}
+    {% endif %}
+</span>
+    </li>
+    <li class="feedback-item">
+        <span class="feedback-label">Ваши предложения и замечания:</span>
+        <span class="feedback-value"><pre>{{ data.message }}</pre></span>
+       
+    </li>
+    
+</ul>
+
+{% endif %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('DOM fully loaded and parsed');
+        const form = document.querySelector('form#feedbackForm');
+
+        if (form) {
+            console.log('Form found:', form);
+            const submitButton = form.querySelector('input[type="submit"]');
+            const inputFields = form.querySelectorAll('input, textarea, select');
+
+            if (submitButton) {
+                console.log('Submit button found:', submitButton);
+                // Изменение цвета надписи на кнопке при наведении
+                submitButton.addEventListener('mouseover', function () {
+                    console.log('Mouse over submit button');
+                    submitButton.style.color = '#D3D3D3'; // light gray color
+                });
+
+                submitButton.addEventListener('mouseout', function () {
+                    console.log('Mouse out submit button');
+                    submitButton.style.color = '';
+                });
+            } else {
+                console.error('Submit button not found');
+            }
+
+            if (inputFields.length > 0) {
+                console.log('Input fields found:', inputFields);
+                // Изменение цвета фона полей ввода при фокусе
+                inputFields.forEach(function (field) {
+                    field.addEventListener('focus', function () {
+                        console.log('Focus on input field:', field);
+                        field.style.backgroundColor = '#D3D3D3'; // light gray background-color
+                    });
+
+                    field.addEventListener('blur', function () {
+                        console.log('Blur on input field:', field);
+                        field.style.backgroundColor = '';
+                    });
+                });
+            } else {
+                console.error('No input fields found');
+            }
+        } else {
+            console.error('Form not found');
+        }
+    });
+</script>
+
+
+
+
+    
+
+{% endblock %}

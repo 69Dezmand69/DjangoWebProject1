@@ -1,0 +1,56 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="row">
+   <div class="reg-form">
+        <section id="registerForm">
+            <form action="." method="post" class="form-horizontal">
+                {% csrf_token %}
+                <div class="container-log">
+                    <h4>Зарегистрироваться.</h4>
+                </div>
+                <hr />
+                 <div class="form-group">
+                    <label for="id_username" class="col-md-2 control-label">Логин </label>
+                    <div class="col-md-10">
+                        {{ regform.username }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_password" class="col-md-2 control-label">Пароль</label>
+                    <div class="col-md-10">
+                        {{ regform.password1 }}
+                    </div>
+                </div>
+                  <div class="form-group">
+                    <label for="id_password" class="col-md-2 control-label">Пароль</label>
+                    <div class="col-md-10">
+                        {{ regform.password2 }}
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Зарегистрироваться" class="btn btn-primary" />
+                    </div>
+                </div>
+                {% if regform.errors %}
+                <p class="validation-summary-errors">Пожалуйста, исправьте ошибки в форме.</p>
+                {% endif %}
+            </form>
+        </section>
+    </div>
+    <div class="col-md-4">
+        <section id="socialRegisterForm"></section>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    {% load static %}
+    <script src="{% static 'app/scripts/jquery.validate.min.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,425 @@
+body {
+    padding-top: 70px;
+    padding-bottom: 20px;
+
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.7em;
+    margin-bottom: 10px;
+    color: #343a40;
+}
+
+.card-text {
+    font-size: 1em;
+    color: #666;
+}
+.btn-primary {
+    background-color: #343a40;
+    border-color: #343a40;
+
+}
+.btn-primary:hover {
+        color: #a74ac2; /*  текст при наведении */
+        background-color: #495057; /* Темный фон при наведении */
+        border-radius: 5px; /* Скругленные углы */
+}
+ 
+
+.ava {
+    height: 55px;
+    width: 110px;
+}
+.zagolovok {
+    text-align: center;
+}
+.container-log {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #343a40;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+.news-title {
+    background-color: #343a40; /* Серый фон */
+    padding: 10px 20px; /* Внутренние отступы */
+    border-radius: 8px; /* Скругленные углы */
+    font-weight: bold; /* Жирный текст */
+    font-size: 2.5em; /* Увеличенный размер шрифта */
+    color:#ffffff; /* Черный или ближе к серому цвет текста */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для красивого эффекта */
+    text-align: center;
+}
+
+.news-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.news-item h2 {
+        margin-bottom: 50px; /* Отступ снизу */
+        font-size: 1.5em;
+        color: #333; /* Черный или ближе к серому цвет */
+        text-align: center; /* Выравнивание текста по центру */
+}
+.news-item img {
+        max-width: 90%;
+        height: auto;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+.border {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+                                                                                         /* отзывы */
+.feedback-form {
+    background-color: #f0f0f0; /* Серый фон */
+    padding: 20px; /* Внутренние отступы */
+    border-radius: 10px; /* Скругленные углы */
+    margin: 0 auto; /* Центрирование по горизонтали */
+    max-width: 600px; /* Максимальная ширина */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для красивого эффекта */
+
+}
+.feedback-item {
+    margin-bottom: 10px; /* Отступ снизу для каждого элемента списка */
+}
+
+.feedback-label {
+    font-weight: bold; /* Жирный текст */
+    color: #333; /* Темно-серый цвет текста */
+    margin-right: 10px; /* Отступ справа */
+}
+
+.feedback-value {
+    font-size: 16px;
+    color: #343a40;
+}
+
+.btn-primary_feedback {
+    display: block; /* Отображение кнопки как блока */
+    width: 100%; /* Ширина кнопки */
+    margin: 20px auto; /* Центрирование кнопки по горизонтали и отступ сверху и снизу */
+    padding: 10px 15px; /* Внутренние отступы */
+    font-size: 16px; /* Размер шрифта */
+    font-weight: bold; /* Жирный текст */
+    text-align: center; /* Центрирование текста по горизонтали */
+    color: #fff; /* Белый цвет текста */
+    background-color: #343a40; 
+    border: none; /* Убираем границу */
+    border-radius: 4px; /* Скругленные углы */
+    cursor: pointer; /* Указатель при наведении */
+    transition: background-color 0.3s ease; /* Плавный переход цвета фона */
+}
+.btn-primary_feedback:hover {
+        color: #a74ac2; /*  текст при наведении */
+        background-color: #495057; /* Темный фон при наведении */
+        border-radius: 5px; /* Скругленные углы */
+}
+
+
+
+.login-form {
+    background-color: #f0f0f0; /* Серый фон */
+    padding: 20px; /* Внутренние отступы */
+    border-radius: 10px; /* Скругленные углы */
+    margin: 0 auto; /* Центрирование по горизонтали */
+    max-width: 600px; /* Максимальная ширина */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для красивого эффекта */
+}
+
+.reg-form {
+    background-color: #f0f0f0; /* Серый фон */
+    padding: 20px; /* Внутренние отступы */
+    border-radius: 10px; /* Скругленные углы */
+    margin: 0 auto; /* Центрирование по горизонтали */
+    max-width: 600px; /* Максимальная ширина */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для красивого эффекта */
+}
+
+                                                                                            /* navbar*/
+.navbar-inverse {
+    background-color: #343a40; /* Темный фон */
+    border-color: #495057; /* Темная граница */
+}
+
+    /* Цвет шрифта меню */
+.navbar-inverse .navbar-nav > li > a {
+        color: #ffffff; /* Белый текст */
+}
+        /* Стиль пунктов меню при наведении мыши */
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+            color: #a74ac2; /*  текст при наведении */
+            background-color: #495057; /* Темный фон при наведении */
+            border-radius: 5px; /* Скругленные углы */
+}
+
+
+                                                                                                /*blog*/
+
+.blog-title {
+    background-color: #343a40; /* Серый фон */
+    padding: 10px 20px; /* Внутренние отступы */
+    border-radius: 8px; /* Скругленные углы */
+    font-weight: bold; /* Жирный текст */
+    font-size: 2.5em; /* Увеличенный размер шрифта */
+    color: #ffffff; /* Черный или ближе к серому цвет текста */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для красивого эффекта */
+    text-align: center;
+}
+.blog-card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-card-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.blog-card-subtitle {
+    font-size: 1.5rem;
+    color: #6c757d;
+}
+
+.blog-card-text {
+    font-size: 1.5rem;
+    color: #212529;
+}
+                                                                                                /*blogpost*/
+.blogpost-content {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.blogpost-comment-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.blogpost-comment-date {
+    font-size: 1rem;
+    color: #999;
+    margin-bottom: 0.5rem;
+}
+
+.blogpost-comment-author {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.blogpost-comment-text {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.blogpost-form-group {
+    margin-bottom: 1rem;
+}
+.blogpost-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 500px; /* Установите максимальную высоту по вашему усмотрению */
+    object-fit: cover;
+    margin: 2rem auto; /* Центрирование по горизонтали */
+    display: block;
+}
+.carousel-img {
+    width: 100%; /* Ensure the image takes the full width of the carousel */
+    height: 100px; /* Set a fixed height for all images */
+    object-fit: cover; /* Ensure the image covers the entire area without distortion */
+}
+
+.carousel-caption {
+    bottom: 10px; /* Позиционирование подписи внизу изображения */
+    left: 20px;
+    right: 8000px;
+    padding: 50px;
+    
+}
+
+.price-tag {
+    display: block;
+    font-family: 'Press Start 2P', cursive;
+    font-weight: bold;
+    color: #ddd; /* Золотой цвет для цены */
+    margin-top: 10px;
+}
+                                                                                    /*videopost*/
+
+
+
+
+.video-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+.video-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.video-box {
+    margin: 1rem 0;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+    .video-box h2 {
+        font-size: 1.9rem;
+        color: #fcfcfc;
+        margin-bottom: 1rem;
+    }
+
+    .video-box video {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+
+
+.videopost-form {
+    background-color: #f0f0f0; /* Серый фон */
+    padding: 20px; /* Внутренние отступы */
+    border-radius: 10px; /* Скругленные углы */
+    margin: 0 auto; /* Центрирование по горизонтали */
+    max-width: 1200px; /* Максимальная ширина */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для красивого эффекта */
+}
+
+.modal-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.modal-header .modal-title {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.genre-info, .price-info {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+    .genre-info strong, .price-info strong {
+        color: #007bff; /* Bootstrap primary color */
+    }
+.centered-large-title {
+    text-align: center;
+    font-size: 2em; /* Adjust the size as needed */
+    font-weight: bold;
+    margin: 20px 0; /* Add some margin for spacing */
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #2b053b;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.videogame_card {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #eceeef;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+                                                                                                             /* поисковая строка */
+
+
+.search_card {
+    padding: 10px;
+    margin: 10px auto; /* Центрирование блока по горизонтали */
+    background-color: #eceeef;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    width: 50%; /* Ширина блока 50% */
+    display: flex; /* Использование Flexbox */
+    flex-direction: column; /* Выравнивание содержимого по вертикали */
+    justify-content: center; /* Центрирование содержимого по вертикали */
+    box-sizing: border-box; /* Включение padding и border в общую ширину */
+}
+
+.basket {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #eceeef;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}

@@ -1,0 +1,29 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<div class="container">
+    <h1 class="news-title">Новости игр</h1>
+    <div class="news-item">
+        <h2>Новая игра от известной студии</h2>
+        <a href="https://vgtimes.ru/gaming-news/115091-vyshel-novyy-geympleynyy-treyler-stalker-2.html" target="_blank">
+            <img src="{% static 'app/content/stalker.png' %}" alt="stalker"/>
+        </a>
+        <p>На канале IGN вышел эксклюзивный геймплейный трейлер S.T.A.L.K.E.R. 2: Heart of Chornobyl, приуроченный к скорому релизу экшена. В ролике показали новые кадры Зоны и систему улучшения оружия у торговцев, а также вновь напомнили о выходе игры 20 ноября.</p>
+    </div>
+    <div class="news-item">
+        <h2>Слух: CD Projekt RED может выпустить собственный фильм по «Ведьмаку»</h2>
+        <a href="https://vgtimes.ru/news/115099-sluh-cd-projekt-red-mozhet-vypustit-sobstvennyy-film-po-vedmaku.html" target="_blank">
+            <img src="{% static 'app/content/vedmak.jpg' %}" alt="vedmak"/>
+        </a>
+        <p>Издание GameRant обратило внимание на недавнюю вакансию сценариста, опубликованную студией CD Projekt RED. Судя по перечисленным компетенциям, CDPR вполне может поработать над собственной экранизацией «Ведьмака».</p>
+    </div>
+    <div class="news-item">
+        <h2>В Steam вышла фэнтези-песочница с «живым» открытым миром, которая попала в ТОП-10 самых ожидаемых игр ноября</h2>
+        <a href="https://vgtimes.ru/video/115080-v-steam-vyshla-fentezi-pesochnica-s-zhivym-otkrytym-mirom-kotoraya-popala-v-top-10-samyh-ozhidaemyh-igr-noyabrya.html" target="_blank">
+            <img src="{% static 'app/content/mirthwood.jpg' %}" alt="mirthwood"/>
+        </a>
+        <p>В сервисе Valve состоялся релиз Mirthwood — средневековой RPG с открытым миром, в которой можно как заняться поиском приключений, так и создать собственное поселение. Проект признан одной из самых ожидаемых игр ноября для PC.</p>
+    </div>
+</div>
+{% endblock %}

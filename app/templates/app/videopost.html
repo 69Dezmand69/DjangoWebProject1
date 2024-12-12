@@ -1,0 +1,33 @@
+﻿{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1 class="news-title">Трейлеры</h1>
+    <div class="videopost-form">
+    <div class="news-item">
+        <div class="video-container">
+            <div class="video-box">
+                <h2>Warhammer 40,000: Space Marine 2 Трейлер:</h2>
+                <VIDEO src="/media/trailer1.mp4" controls="controls" width="400" height="300" poster="/media/1.jpg"></VIDEO>
+            </div>
+        </div>
+
+        <div class="video-container">
+            <div class="video-box">
+                <h2>Path of Exile 2: Early Access Геймплейный трейлер:</h2>
+                <VIDEO src="/media/trailer2.mp4" controls="controls" width="400" height="300" poster="/media/2.jpeg"></VIDEO>
+            </div>
+        </div>
+
+        <div class="video-container">
+            <div class="video-box">
+                <h2>Grand Theft Auto VI Трейлер:</h2>
+                <VIDEO src="/media/trailer3.mp4" controls="controls" width="400" height="300" poster="/media/3.jpeg"></VIDEO>
+            </div>
+        </div>
+    </div>
+         </div>
+</div>
+{% endblock %}

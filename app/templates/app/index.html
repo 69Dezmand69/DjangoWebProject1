@@ -1,0 +1,139 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>GamesValult</h1>
+    <p class="lead">На нашем сайте вы сможете купить любые игры на свой аккаунт steam.</p>
+    <p><a href="{% url 'about' %}" class="btn btn-primary btn-large">О нас &raquo;</a></p>
+</div>
+<div class="row">
+     <h1 class= "news-title">Популярные жанры</h1>
+    {% load static %}
+    <div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'app/content/4.jpg' %}" class="card-img-top" alt="Category 1">
+            <div class="card-body">
+                <h2 class="card-title">Экшн</h2>
+                <p class="card-text">
+                    Игры в жанре экшн предлагают динамичный геймплей, полный боевых действий и приключений.
+                </p>
+                <p><a class="btn btn-primary" href="{% url 'videogame_list' %}?genre=Экшн">Посмотреть игры &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'app/content/2.jpeg' %}" class="card-img-top" alt="Category 2">
+            <div class="card-body">
+                <h2 class="card-title">Приключения</h2>
+                <p class="card-text">
+                    Игры в жанре приключений предлагают увлекательные сюжеты и захватывающие исследования.
+                </p>
+                <p><a class="btn btn-primary" href="{% url 'videogame_list' %}?genre=Приключение">Посмотреть игры &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'app/content/3.jpg' %}" class="card-img-top" alt="Category 3">
+            <div class="card-body">
+                <h2 class="card-title">Стратегия</h2>
+                <p class="card-text">
+                    Игры в жанре стратегии требуют тактического мышления и планирования для достижения победы.
+                </p>
+                <p><a class="btn btn-primary" href="{% url 'videogame_list' %}?genre=Стратегия">Посмотреть игры &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+        <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'app/content/5.jpg' %}" class="card-img-top" alt="Category 4">
+            <div class="card-body">
+                <h2 class="card-title">Хороры</h2>
+                <p class="card-text">
+                   Игры в жанре хоррора требуют смелости и выдержки, чтобы преодолеть страхи и раскрыть тайны.
+                </p>
+                <p><a class="btn btn-primary" href="{% url 'videogame_list' %}?genre=Хорор">Посмотреть игры &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+        <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'app/content/6.jpeg' %}" class="card-img-top" alt="Category 5">
+            <div class="card-body">
+                <h2 class="card-title">Песочницы</h2>
+                <p class="card-text">
+                    Игры в жанре песочницы предоставляют игрокам полную свободу действий и творчества. 
+                </p>
+                <p><a class="btn btn-primary" href="{% url 'videogame_list' %}?genre=Песочница">Посмотреть игры &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+        <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'app/content/7.jpg' %}" class="card-img-top" alt="Category 6">
+            <div class="card-body">
+                <h2 class="card-title">Аркады</h2>
+                <p class="card-text">
+                   Игры в жанре аркады предлагают быстрый и захватывающий геймплей.
+                </p>
+                <p><a class="btn btn-primary" href="{% url 'videogame_list' %}?genre=Аркада">Посмотреть игры &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+    <h1 class= "news-title">Хиты продаж</h1>
+<div class="jumbotron">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">     
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+               <a href="{% url 'videogame_list' %}?q=Baldur's Gate">
+                <img src="{% static 'app/content/banner1.jpeg'%}" alt="Первый слайд" class="carousel-img " />
+                <div class="carousel-caption" role="option">                   
+                   <p class="price-tag">
+                        Baldur's Gate
+                        1699₽                     
+                    </p>
+                </div>
+               </a>
+            </div>
+            <div class="item">
+               <a href="{% url 'videogame_list' %}?q=Black Myth:Wukong">
+                <img src="{% static 'app/content/banner2.jpg'%}" alt="Второй слайд" class="carousel-img " />
+                <div class="carousel-caption" role="option">
+                     <p class="price-tag">
+                        Black Myth:Wukong 
+                        3999₽                     
+                    </p>
+                </div>
+               </a>        
+            </div>
+            <div class="item">
+               <a href="{% url 'videogame_list' %}?q=PoE2">
+                <img src="{% static 'app/content/banner3.jpg'%}" alt="Третий слайд" class="carousel-img" />
+                <div class="carousel-caption" role="option">
+                     <p class="price-tag">
+                        PoE2
+                        1999₽                     
+                    </p>
+                
+                </div>
+               </a>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+    <div class="jb-ourchoise-item__container">
+        </div>
+ </div>
+{% endblock %}

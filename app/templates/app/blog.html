@@ -1,0 +1,26 @@
+﻿{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="blog-title">Блог</h1>
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="blog-card-title">{{ post.title }}</h2>
+                    {% if post.image %}
+                    <img src="{% static 'app/content/' %}{{ post.image }}" class="blog-card-img-top img-fluid " alt="{{ post.title }}">
+                    {% endif %}
+                    <p class="card-text">{{ post.description }}</p>
+                    <h4 class="card-subtitle mb-2 text-muted">{{ post.posted }}</h4>
+                    <a href="{% url 'blogpost' parametr=post.id %}" class="btn btn-primary">Читать далее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
