@@ -5,7 +5,7 @@
 <div class="jumbotron">
     <h1>GamesValult</h1>
     <p class="lead">На нашем сайте вы сможете купить любые игры на свой аккаунт steam.</p>
-    <p><a href="{% url 'about' %}" class="btn btn-primary btn-large">О нас &raquo;</a></p>
+    <p><a href="{% url 'feedback_list' %}" class="btn btn-primary btn-large">Наши отзывы &raquo;</a></p>
 </div>
 <div class="row">
      <h1 class= "news-title">Популярные жанры</h1>
@@ -94,13 +94,13 @@
                 <div class="carousel-caption" role="option">                   
                    <p class="price-tag">
                         Baldur's Gate
-                        1699₽                     
+                        1799₽                     
                     </p>
                 </div>
                </a>
             </div>
             <div class="item">
-               <a href="{% url 'videogame_list' %}?q=Black Myth:Wukong">
+               <a href="{% url 'videogame_list' %}?q=Black Myth">
                 <img src="{% static 'app/content/banner2.jpg'%}" alt="Второй слайд" class="carousel-img " />
                 <div class="carousel-caption" role="option">
                      <p class="price-tag">

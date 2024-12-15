@@ -25,14 +25,25 @@ urlpatterns = [
     path('newpost/', views.newpost, name='newpost'),
     path('videopost/', views.videopost, name='videopost'),
      path('videogames/', views.videogame_list, name='videogame_list'),
-    path('videogames/<int:parametr>/', views.videogame_detail, name='videogame'),
+    
      path('add_to_cart/<int:game_id>/', views.add_to_cart, name='add_to_cart'),
     path('cart/', views.cart_detail, name='cart_detail'),
      path('checkout/', views.checkout, name='checkout'),
     path('remove_from_cart/<int:item_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('cart/', views.cart, name='cart'),
-    
+   path('checkout/', views.checkout, name='checkout'),
+    path('my_orders/', views.my_orders, name='my_orders'),
+    path('all_orders/', views.all_orders, name='all_orders'),
+    path('add_to_cart/<int:game_id>/', views.add_to_cart, name='add_to_cart'),
+    path('videogames/', views.videogame_list, name='videogame_list'),
+    path('videogames/<int:game_id>/add_comment/', views.add_comment, name='add_comment'),
+     path('delete_comment/<int:comment_id>/', views.delete_comment, name='delete_comment'),
+      path('add_to_cart/<int:game_id>/', views.add_to_cart, name='add_to_cart'),
+      path('delete_comment/<int:comment_id>/', views.delete_comment, name='delete_comment'),
+     path('feedback-list/', views.feedback_list, name='feedback_list'),
+
    
+    # Other URL patterns
 
     path('login/',
          LoginView.as_view

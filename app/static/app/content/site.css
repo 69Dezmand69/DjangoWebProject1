@@ -423,3 +423,82 @@ input[type="checkbox"].input-validation-error {
     border-radius: 5px;
     text-align: center;
 }
+
+.comentgames {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+                                                                                        /*оплата успешна */
+
+.success-icon {
+    margin-top: 50px;
+}
+
+.check-title {
+    font-size: 2.5em;
+    color: #333;
+}
+
+.lead {
+    font-size: 1.25em;
+    color: #666;
+}
+
+                                                                                                /*заказы */
+
+.order-card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #e9ecef;
+    color: #333;
+    padding: 1rem;
+    border-radius: 0.25rem 0.25rem 0 0;
+    cursor: pointer;
+}
+
+.order-title {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.order-date {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.order-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+    .order-item:last-child {
+        border-bottom: none;
+    }
+
+.item-title {
+    font-weight: bold;
+}
+
+.item-quantity {
+    color: #6c757d;
+}
+
+.total-price {
+    font-size: 1.5rem;
+    color: #333;
+}

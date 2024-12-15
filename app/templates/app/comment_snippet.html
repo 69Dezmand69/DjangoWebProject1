@@ -1,0 +1,10 @@
+﻿<hr />
+<h7 class="blogpost-comment-date">{{ comment.date }}</h7>
+<h5 class="blogpost-comment-author">{{ comment.author }}</h5>
+<p class="blogpost-comment-title">{{ comment.text|linebreaksbr }}</p>
+{% if user.is_staff %}
+<form method="POST" action="{% url 'delete_game_comment' comment.id %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Удалить комментарий</button>
+</form>
+{% endif %}

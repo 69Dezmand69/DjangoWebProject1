@@ -5,6 +5,8 @@
         <form id="logoutForm" action="/logout/" method="post" style="display: none;">
             {% csrf_token %}
             <button type="submit" class="btn btn-primary">Выйти</button>
+            <a href="{% url 'my_orders' %}" class="btn btn-primary">Мои заказы</a>
+            
         </form>
     </li>
 </ul>

@@ -97,7 +97,7 @@ class VideoGame(models.Model):
     title = models.CharField(max_length=100, verbose_name="Название игры")
     description = models.TextField(default='', verbose_name="Описание")
     image = models.FileField(default='temp.jpg', verbose_name="Путь к картинке")
-    genres = models.ManyToManyField(Genre, verbose_name="Жанры")
+    genres = models.ManyToManyField('Genre', verbose_name="Жанры")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")
 
     def get_absolute_url(self):
@@ -130,3 +130,53 @@ class CartItem(models.Model):
     def total_price(self):
         return self.quantity * self.game.price
 
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    game = models.ForeignKey(VideoGame, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+class OrderQuerySet(models.QuerySet):
+    def by_client(self, client):
+        return self.filter(client=client)
+
+    def by_status(self, status):
+        return self.filter(status=status)
+
+    def recent_orders(self):
+        return self.order_by('-order_date')
+
+class VideoGameComment(models.Model):
+    game = models.ForeignKey(VideoGame, related_name='comments', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField(verbose_name="Содержание")
+    rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)], verbose_name="Рейтинг")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+
+    def __str__(self):
+        return f"{self.user.username} - {self.game.title}"
+
+    class Meta:
+        db_table = "VideoGameComments"
+        verbose_name = "комментарий к видеоигре"
+        verbose_name_plural = "комментарии к видеоиграм"
+
+
+
+class Feedback(models.Model):
+    nickname = models.CharField(max_length=100)
+    game = models.ForeignKey(VideoGame, on_delete=models.CASCADE)
+    speed = models.IntegerField()
+    price = models.IntegerField()
+    service = models.IntegerField()
+    message = models.TextField()
+    average_rating = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Feedback by {self.nickname} on {self.game}"

@@ -5,6 +5,9 @@
 {% block content %}
 <div class="container mt-4">
     <h1 class="blog-title">Блог</h1>
+    {% if user.is_authenticated and user.is_superuser %}
+                    <a href="{% url 'newpost' %}"class="btn btn-primary">Добавить блог</a>
+                    {% endif %}
     <div class="row">
         {% for post in posts %}
         <div class="col-md-4 mb-4">

@@ -11,6 +11,7 @@ from django.db import models
 from .models import Comment
 from .models import Blog
 from .models import VideoGame
+from .models import VideoGameComment
 
 class BootstrapAuthenticationForm(AuthenticationForm):
     """Authentication form which uses boostrap CSS."""
@@ -44,13 +45,41 @@ class BootstrapAuthenticationForm(AuthenticationForm):
     )
 
 class FeedbackForm(forms.Form):
-    nickname = forms.CharField(label='Никнейм',max_length=100,required=True,widget=forms.TextInput(attrs={'class': 'form-control'}))
-    game = forms.CharField(label='Какую игру приобрели',max_length=100,required=True,widget=forms.TextInput(attrs={'class': 'form-control'}))
-    speed = forms.ChoiceField(label='Скорость (от 1 до 5)',choices=[(i, str(i)) for i in range(1, 6)],required=True,widget=forms.Select(attrs={'class': 'form-control'}))
-    price = forms.ChoiceField(label='Цена (от 1 до 5)',choices=[(i, str(i)) for i in range(1, 6)],required=True,widget=forms.Select(attrs={'class': 'form-control'}))
-    service = forms.ChoiceField(label='Качество обслуживания (от 1 до 5)',choices=[(i, str(i)) for i in range(1, 6)],required=True,widget=forms.Select(attrs={'class': 'form-control'}))
-    message = forms.CharField(label='Комментарий',required=True,widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3})
-)
+    nickname = forms.CharField(
+        label='Никнейм',
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    game = forms.ModelChoiceField(
+        label='Какую игру приобрели',
+        queryset=VideoGame.objects.all(),  # Use the Game model to populate the choices
+        required=True,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    speed = forms.ChoiceField(
+        label='Скорость (от 1 до 5)',
+        choices=[(i, str(i)) for i in range(1, 6)],
+        required=True,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    price = forms.ChoiceField(
+        label='Цена (от 1 до 5)',
+        choices=[(i, str(i)) for i in range(1, 6)],
+        required=True,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    service = forms.ChoiceField(
+        label='Качество обслуживания (от 1 до 5)',
+        choices=[(i, str(i)) for i in range(1, 6)],
+        required=True,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    message = forms.CharField(
+        label='Комментарий',
+        required=True,
+        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3})
+    )
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -78,3 +107,8 @@ class VideoGameForm(forms.ModelForm):
             'genres': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
         }
+
+class VideoGameCommentForm(forms.ModelForm):
+    class Meta:
+        model = VideoGameComment
+        fields = ['content', 'rating']

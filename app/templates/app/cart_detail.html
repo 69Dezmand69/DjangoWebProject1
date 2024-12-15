@@ -14,7 +14,7 @@
                     <h2 class="news-title">{{ item.game.title }}</h2>
                     <p class="card-text">Количество: {{ item.quantity }}</p>
                     <p class="card-text">Цена: {{ item.game.price }}</p>
-                    
+
                     <form action="{% url 'remove_from_cart' item.id %}" method="post" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger">Удалить</button>
@@ -26,7 +26,7 @@
     </div>
     <div class="basket">
         <h3>Общая стоимость: {{ total_price }}</h3>
-        <a href="{% url 'checkout' %}" class="btn btn-primary">Оплатить</a>
+        <a href="{% url 'checkout' %}" class="btn btn-primary" {% if not cart_items or total_price <= 1 %}disabled{% endif %}>Оплатить</a>
     </div>
 </div>
 {% endblock %}

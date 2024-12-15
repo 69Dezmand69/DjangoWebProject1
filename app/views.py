@@ -18,11 +18,13 @@ from .models import VideoGame
 from django.db.models import Q
 from .models import VideoGame, Genre
 from django.contrib.auth.decorators import login_required
-from .models import Cart, CartItem
 from django.views.decorators.http import require_POST
 from django.shortcuts import render, get_object_or_404
 logger = logging.getLogger(__name__)
-
+from .models import Cart, CartItem, Order, OrderItem
+from .models import Feedback
+from .models import VideoGame, VideoGameComment, Genre
+from .forms import VideoGameCommentForm
 
 
 def home(request):
@@ -95,11 +97,24 @@ def feedback(request):
             # Вычисление средней оценки
             average_rating = round((int(data['speed']) + int(data['price']) + int(data['service'])) / 3, 1)
 
+            # Сохранение отзыва в базе данных
+            feedback_instance = Feedback(
+                nickname=data['nickname'],
+                game=data['game'],
+                speed=data['speed'],
+                price=data['price'],
+                service=data['service'],
+                message=data['message'],
+                average_rating=average_rating
+            )
+            feedback_instance.save()
+
             form = None
         else:
             logger.error(f"Form errors: {form.errors}")
     else:
-        form = FeedbackForm()
+        initial_data = {'nickname': request.user.username} if request.user.is_authenticated else {}
+        form = FeedbackForm(initial=initial_data)
 
     return render(
         request,
@@ -111,6 +126,7 @@ def feedback(request):
             'year': datetime.now().year,
         }
     )
+
 
 def registration(request):
     """Renders the registration page."""
@@ -238,23 +254,35 @@ def videopost(request):
 
 
 def videogame_list(request):
+    genres = Genre.objects.all()
     query = request.GET.get('q')
-    genre = request.GET.get('genre')
+    genre_name = request.GET.get('genre')
+
     games = VideoGame.objects.all()
 
     if query:
-        games = games.filter(Q(title__icontains=query))
+        games = games.filter(Q(title__icontains=query) | Q(description__icontains=query))
 
-    if genre:
-        games = games.filter(Q(genres__name__icontains=genre))
+    if genre_name:
+        games = games.filter(genres__name=genre_name)
 
-    genres = Genre.objects.all()
-    return render(request, 'app/videogame_list.html', {'games': games, 'genres': genres})
+    if request.method == 'POST':
+        comment_form = VideoGameCommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.game = get_object_or_404(VideoGame, id=request.POST.get('game_id'))
+            comment.user = request.user
+            comment.save()
+            return redirect('videogame_list')
+    else:
+        comment_form = VideoGameCommentForm()
 
-def videogame_detail(request, parametr):
-    game = get_object_or_404(VideoGame, id=parametr)
-    return render(request, 'app/videogame_detail.html', {'game': game})
-
+    return render(request, 'app/videogame_list.html', {
+        'games': games,
+        'genres': genres,
+        'comment_form': comment_form,
+        'year': datetime.now().year,
+    })
 @login_required
 def add_to_cart(request, game_id):
     game = get_object_or_404(VideoGame, id=game_id)
@@ -263,7 +291,16 @@ def add_to_cart(request, game_id):
     if not created:
         cart_item.quantity += 1
         cart_item.save()
-    return redirect('cart_detail')
+    return redirect('videogame_list')
+
+@login_required
+def add_comment(request, game_id):
+    game = get_object_or_404(VideoGame, id=game_id)
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        VideoGameComment.objects.create(game=game, user=request.user, content=content)
+    return redirect('videogame_list')
+
 
 @login_required
 def cart_detail(request):
@@ -271,12 +308,19 @@ def cart_detail(request):
     cart_items = CartItem.objects.filter(cart=cart)
     total_price = sum(item.total_price() for item in cart_items)
     return render(request, 'app/cart_detail.html', {'cart': cart, 'cart_items': cart_items, 'total_price': total_price})
+ 
 @login_required
 def checkout(request):
-    cart = get_object_or_404(Cart, user=request.user)
+    cart = Cart.objects.get(user=request.user)
     cart_items = CartItem.objects.filter(cart=cart)
-    total_price = sum(item.total_price() for item in cart_items)
-    return render(request, 'app/checkout.html', {'cart': cart, 'cart_items': cart_items, 'total_price': total_price})
+    total_price = sum(item.game.price * item.quantity for item in cart_items)
+
+    order = Order.objects.create(user=request.user, total_price=total_price)
+    for item in cart_items:
+        OrderItem.objects.create(order=order, game=item.game, quantity=item.quantity, price=item.game.price)
+
+    cart_items.delete()
+    return render(request, 'app/checkout_success.html')
 
 @require_POST
 def remove_from_cart(request, item_id):
@@ -289,4 +333,32 @@ def cart(request):
     total_price = sum(item.total_price for item in cart_items)
     return render(request, 'app/cart.html', {'cart_items': cart_items, 'total_price': total_price})
 
+@login_required
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    total_price = sum(order.total_price for order in orders)
+    return render(request, 'app/my_orders.html', {
+        'orders': orders,
+        'total_price': total_price,
+    })
 
+
+@login_required
+def all_orders(request):
+    orders = Order.objects.all().order_by('-created_at')
+    total_price = sum(order.total_price for order in orders)
+    return render(request, 'app/all_orders.html', {
+        'orders': orders,
+        'total_price': total_price,
+    })
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(VideoGameComment, id=comment_id)
+    if request.user.is_superuser or request.user == comment.user:
+        comment.delete()
+    return redirect('videogame_list')
+
+def feedback_list(request):
+    feedbacks = Feedback.objects.all()
+    return render(request, 'app/feedback_list.html', {'feedbacks': feedbacks})

@@ -57,10 +57,21 @@
     <Folder Include="DjangoWebProject1\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\all_orders.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="app\templates\app\blog.html" />
     <Content Include="app\templates\app\blogpost.html" />
     <Content Include="app\templates\app\cart_detail.html" />
     <Content Include="app\templates\app\checkout.html" />
+    <Content Include="app\templates\app\checkout_success.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="app\templates\app\comment_snippet.html" />
+    <Content Include="app\templates\app\feedback_list.html" />
+    <Content Include="app\templates\app\my_orders.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="app\templates\app\newpost.html" />
     <Content Include="app\templates\app\news.html" />
     <Content Include="app\templates\app\feedback.html" />
