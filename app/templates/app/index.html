@@ -65,7 +65,7 @@
             <div class="card-body">
                 <h2 class="card-title">Песочницы</h2>
                 <p class="card-text">
-                    Игры в жанре песочницы предоставляют игрокам полную свободу действий и творчества. 
+                    Игры в жанре песочницы предоставляют игрокам полную свободу действий и творчества.
                 </p>
                 <p><a class="btn btn-primary" href="{% url 'videogame_list' %}?genre=Песочница">Посмотреть игры &raquo;</a></p>
             </div>
@@ -86,15 +86,15 @@
 </div>
     <h1 class= "news-title">Хиты продаж</h1>
 <div class="jumbotron">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">     
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
         <div class="carousel-inner" role="listbox">
             <div class="item active">
                <a href="{% url 'videogame_list' %}?q=Baldur's Gate">
                 <img src="{% static 'app/content/banner1.jpeg'%}" alt="Первый слайд" class="carousel-img " />
-                <div class="carousel-caption" role="option">                   
+                <div class="carousel-caption" role="option">
                    <p class="price-tag">
                         Baldur's Gate
-                        1799₽                     
+                        1799₽
                     </p>
                 </div>
                </a>
@@ -104,11 +104,11 @@
                 <img src="{% static 'app/content/banner2.jpg'%}" alt="Второй слайд" class="carousel-img " />
                 <div class="carousel-caption" role="option">
                      <p class="price-tag">
-                        Black Myth:Wukong 
-                        3999₽                     
+                        Black Myth:Wukong
+                        3999₽
                     </p>
                 </div>
-               </a>        
+               </a>
             </div>
             <div class="item">
                <a href="{% url 'videogame_list' %}?q=PoE2">
@@ -116,9 +116,8 @@
                 <div class="carousel-caption" role="option">
                      <p class="price-tag">
                         PoE2
-                        1999₽                     
+                        1999₽
                     </p>
-                
                 </div>
                </a>
             </div>
@@ -136,4 +135,29 @@
     <div class="jb-ourchoise-item__container">
         </div>
  </div>
+
+<!-- Добавляем раздел для отображения последних блогов -->
+<div class="container mt-4">
+    <h1 class="blog-title">Наш блог</h1>
+    <div class="row">
+        {% for post in latest_posts %}
+        <div class="col-md-4 mb-4 blog_card">
+            <div class="card h-100">
+                {% if post.image %}
+                <img src="{% static 'app/content/' %}{{ post.image }}" class="card-img-top img-fluid" alt="{{ post.title }}" style="object-fit: cover; height: 200px;">
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                    <h2 class="news-title">{{ post.title }}</h2>
+                    <p class="card-text flex-grow-1">{{ post.description }}</p>
+                    <h4 class="card-subtitle mb-2 text-muted">{{ post.posted }}</h4>
+                    <a href="{% url 'blogpost' parametr=post.id %}" class="btn btn-primary mt-auto">Читать далее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
 {% endblock %}
+

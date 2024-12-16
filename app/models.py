@@ -180,3 +180,5 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f"Feedback by {self.nickname} on {self.game}"
+
+

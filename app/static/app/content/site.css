@@ -502,3 +502,78 @@ input[type="checkbox"].input-validation-error {
     font-size: 1.5rem;
     color: #333;
 }
+
+
+
+/* feedback_styles.css */
+.feedback-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+    .feedback-card:hover {
+        transform: translateY(-5px);
+    }
+
+.feedback-card-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.feedback-card-text {
+    color: #666;
+}
+
+    .feedback-card-text pre {
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        white-space: pre-wrap; /* Для корректного отображения многострочных комментариев */
+    }
+
+
+.blog_card {
+    margin-top: 20px; /* Добавляем отступ сверху */
+    margin-bottom: 20px; /* Добавляем отступ снизу */
+}
+
+    .blog_card .card {
+        display: flex;
+        flex-direction: column;
+        height: 70%;
+    }
+
+    .blog_card .card-body {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .blog_card .card-text {
+        flex: 1 1 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Количество строк, после которых текст будет обрезан */
+        -webkit-box-orient: vertical;
+    }
+
+    .blog_card .btn-primary {
+        margin-top: auto;
+    }
+
+.blog-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.blog-image {
+    max-width: 50%;
+    height: auto;
+    border-radius: 8px; /* Добавляем скругленные углы для изображения */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Добавляем тень для изображения */
+}

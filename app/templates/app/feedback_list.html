@@ -1,17 +1,21 @@
 ﻿{% extends "app/layout.html" %}
 
 {% block content %}
-<div class="news-title">
-    <h1>Отзывы</h1>
-</div>
-<div class="feedback-list">
-    {% for feedback in feedbacks %}
-    <div class="feedback-item">
-        <h2>{{ feedback.nickname }}</h2>
-        <p><strong>Игра:</strong> {{ feedback.game }}</p>
-        <p><strong>Средняя оценка:</strong> {{ feedback.average_rating }}</p>
-        <p><strong>Комментарий:</strong> <pre>{{ feedback.message }}</pre></p>
+<div class="container mt-4">
+    <h1 class="news-title">Видеоигры</h1>
+    <div class="feedback-list">
+        {% for feedback in feedbacks %}
+        <div class="feedback-card mb-4">
+            <div class="feedback-card-body">
+                <h2 class="feedback-card-title">{{ feedback.nickname }}</h2>
+                <p class="feedback-card-text"><strong>Игра:</strong> {{ feedback.game }}</p>
+                <p class="feedback-card-text"><strong>Средняя оценка:</strong> {{ feedback.average_rating }}</p>
+                <p class="feedback-card-text"><strong>Комментарий:</strong></p>
+                <pre class="feedback-card-text">{{ feedback.message }}</pre>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}
+

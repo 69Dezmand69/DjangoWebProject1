@@ -41,7 +41,7 @@ urlpatterns = [
       path('add_to_cart/<int:game_id>/', views.add_to_cart, name='add_to_cart'),
       path('delete_comment/<int:comment_id>/', views.delete_comment, name='delete_comment'),
      path('feedback-list/', views.feedback_list, name='feedback_list'),
-
+      path('delete_order/<int:order_id>/', views.delete_order, name='delete_order'),
    
     # Other URL patterns
 

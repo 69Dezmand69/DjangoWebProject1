@@ -4,14 +4,15 @@
 
 {% block content %}
 
-    
-<div class="container">        
- <h1 class= "news-title">{{ post_1.title }}</h1>
+<div class="container">
+    <h1 class="news-title">{{ post_1.title }}</h1>
 
-        {% if post_1.image and post_1.image.url != '/media/temp.jpg' %}
-        <img src=" {{ post_1.image.url }}" alt="Картинка статьи блога" width="200" />
-        {% endif %}
-    
+    {% if post_1.image and post_1.image.url != '/media/temp.jpg' %}
+    <div class="blog-image-container">
+        <img src="{{ post_1.image.url }}" alt="Картинка статьи блога" class="blog-image" />
+    </div>
+    {% endif %}
+
     <p>{{ post_1.content|linebreaksbr }}</p>
 
     {% if user.is_authenticated %}
@@ -31,11 +32,12 @@
     <hr />
     {% for comment in comments %}
     <hr />
-    <h7 class="blogpost-comment-date">{{ comment.date }}</h7>
-    <h5 class="blogpost-comment-author">{{ comment.author }}</h5>
-    <p class="blogpost-comment-title">{{ comment.text|linebreaksbr }}</p>
+    
+    <h2 class="blogpost-comment-author">{{ comment.author }}</h2>
+    <p class="content">{{ comment.text|linebreaksbr }}</p>
+     <h5 class="blogpost-comment-date">{{ comment.date }}</h5>
     {% endfor %}
-    <p><a class="btn btn-primary"  href="{% url 'blog' %}">НАЗАД</></a></p>
-   
+    <p><a class="btn btn-primary" href="{% url 'blog' %}">НАЗАД</a></p>
 </div>
+
 {% endblock %}

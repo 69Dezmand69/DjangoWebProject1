@@ -23,12 +23,14 @@
                 </li>
                 {% endfor %}
             </ul>
+            <form method="post" action="{% url 'delete_order' order.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Удалить заказ</button>
+            </form>
         </div>
     </div>
     {% endfor %}
-    
 </div>
-
 
 <script>
     function toggleDetails(header) {

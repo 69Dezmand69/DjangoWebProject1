@@ -25,20 +25,22 @@ from .models import Cart, CartItem, Order, OrderItem
 from .models import Feedback
 from .models import VideoGame, VideoGameComment, Genre
 from .forms import VideoGameCommentForm
-
-
+from django.contrib.auth.decorators import user_passes_test
+from django.urls import reverse
 def home(request):
     """Renders the home page."""
+    latest_posts = Blog.objects.all().order_by('-posted')[:3]  # Получаем три последних блога
+
     assert isinstance(request, HttpRequest)
     return render(
         request,
         'app/index.html',
         {
-            'title':'Главная страница',
-            'year':datetime.now().year,
+            'title': 'Главная страница',
+            'latest_posts': latest_posts,  # Передаем последние блоги в контекст
+            'year': datetime.now().year,
         }
     )
-
 def contact(request):
     """Renders the contact page."""
     assert isinstance(request, HttpRequest)
@@ -328,22 +330,25 @@ def remove_from_cart(request, item_id):
     item.delete()
     return redirect('cart')
 
+@login_required
 def cart(request):
-    cart_items = CartItem.objects.filter(user=request.user)
-    total_price = sum(item.total_price for item in cart_items)
+    cart_items = CartItem.objects.filter(cart__user=request.user)
+    total_price = sum(item.total_price() for item in cart_items)
     return render(request, 'app/cart.html', {'cart_items': cart_items, 'total_price': total_price})
 
 @login_required
 def my_orders(request):
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
     total_price = sum(order.total_price for order in orders)
+    order_count = orders.count()  # Подсчет общего количества заказов
     return render(request, 'app/my_orders.html', {
         'orders': orders,
         'total_price': total_price,
+        'order_count': order_count,  # Передача общего количества заказов в контекст
     })
 
 
-@login_required
+@user_passes_test(lambda u: u.is_staff)
 def all_orders(request):
     orders = Order.objects.all().order_by('-created_at')
     total_price = sum(order.total_price for order in orders)
@@ -351,6 +356,14 @@ def all_orders(request):
         'orders': orders,
         'total_price': total_price,
     })
+
+@user_passes_test(lambda u: u.is_staff)
+def delete_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    if request.method == 'POST':
+        order.delete()
+        return redirect(reverse('all_orders'))
+    return render(request, 'app/all_orders.html')
 
 @login_required
 def delete_comment(request, comment_id):

@@ -3,10 +3,11 @@
 {% block content %}
 <div class="container mt-4">
     <h1 class="news-title text-center mb-4">Мои заказы</h1>
+    <p class="text-center mb-4">Всего заказов: {{ order_count }}</p>
     {% for order in orders %}
     <div class="order-card mb-4">
         <div class="card-header" onclick="toggleDetails(this)">
-            <h2 class="order-title">Заказ №{{ order.id }}</h2>
+            <h2 class="order-title">Ваша покупка</h2>
             <p class="order-date"><i class="fas fa-calendar-alt"></i> Дата: {{ order.created_at }}</p>
             <p class="order-total"><i class="fas fa-dollar-sign"></i> Общая стоимость: {{ order.total_price }}</p>
         </div>
@@ -27,7 +28,6 @@
         <h3><strong>Благодарим вас за доверие!</strong></h3>
     </div>
 </div>
-
 
 
 
